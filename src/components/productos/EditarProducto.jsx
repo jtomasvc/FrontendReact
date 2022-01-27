@@ -23,7 +23,12 @@ const EditarProducto = () => {
 
     //Consultar el API para traer el producto a editar
     const consultarAPI = async () => {
-        const productoConsulta = await clienteAxios.get(`/productos/${id}`)
+        const Token = localStorage.getItem('Token')
+        const productoConsulta = await clienteAxios.get(`/productos/${id}`, {
+            headers: {
+                Authorization: `Bearer ${Token}`
+            }
+        })
         setProducto(productoConsulta.data.producto)
     }
 
@@ -49,7 +54,7 @@ const EditarProducto = () => {
     //Modificando el registro
     const editarProducto = async (e) => {
         e.preventDefault();
-
+        const Token = localStorage.getItem('Token')
         //Crear un formData
         const formData = new FormData()
         formData.append('nombre', producto.nombre)
@@ -60,7 +65,8 @@ const EditarProducto = () => {
         try {
             const res = await clienteAxios.put(`/productos/${id}`, formData, {
                 headers:{
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${Token}`
                 }
             })
             //Lanzar alerta

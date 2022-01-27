@@ -21,7 +21,12 @@ const Producto = ({producto}) => {
           }).then((result) => {
             if (result.isConfirmed) {
                 //eliminar
-                clienteAxios.delete(`/productos/${idProducto}`)
+                const Token = localStorage.getItem('Token')
+                clienteAxios.delete(`/productos/${idProducto}`, {
+                    headers:{
+                        Authorization: `Bearer ${Token}`
+                    }
+                })
                     .then(res => {
                         if(res.status === 200) {
                             Swal.fire(

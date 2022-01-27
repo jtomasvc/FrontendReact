@@ -18,7 +18,12 @@ const EditarCliente = () => {
 
     //Query a la API
     const consultarAPI = async () => {
-        const clienteConsulta = await clienteAxios.get(`/clientes/${id}`)
+        const Token = localStorage.getItem('Token')
+        const clienteConsulta = await clienteAxios.get(`/clientes/${id}`,{
+            headers:{
+                Authorization: `Bearer ${Token}`
+            }
+        })
         setCliente(clienteConsulta.data)
     }
     
@@ -46,8 +51,12 @@ const EditarCliente = () => {
     //Envia peticion para actualizar Cliente
     const actualizarCliente = e => {
         e.preventDefault();
-
-        clienteAxios.put(`/clientes/${cliente._id}`, cliente)
+        const Token = localStorage.getItem('Token')
+        clienteAxios.put(`/clientes/${cliente._id}`, cliente, {
+            headers:{
+                Authorization: `Bearer ${Token}`
+            }
+        })
             .then(res => {
                 //Validar si hay errores de mongo
                 if(res.data.code === 11000) {

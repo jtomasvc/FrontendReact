@@ -17,8 +17,13 @@ const NuevoPedido = () => {
 
     //Obtener cliente
     const consultaAPI = async () => {
+        const Token = localStorage.getItem('Token')
         //consultar cliente actual
-        const resultado = await clienteAxios.get(`/clientes/${id}`)
+        const resultado = await clienteAxios.get(`/clientes/${id}`, {
+            headers:{
+                Authorization: `Bearer ${Token}`
+            }
+        })
         setCliente(resultado.data)
     }
 
@@ -38,8 +43,13 @@ const NuevoPedido = () => {
     const buscarProducto = async (e) => {
         e.preventDefault()
 
+        const Token = localStorage.getItem('Token')
         //Obtener los productos de la busqueda
-        const resultadoBusqueda = await clienteAxios.post(`/productos/busqueda/${buscar}`)
+        const resultadoBusqueda = await clienteAxios.post(`/productos/busqueda/${buscar}`, {
+            headers:{
+                Authorization: `Bearer ${Token}`
+            }
+        })
 
         //Si no hay resultado 
         if(resultadoBusqueda.data[0]) {
@@ -109,8 +119,13 @@ const NuevoPedido = () => {
             "total": total
         }
 
+        const Token = localStorage.getItem('Token')
         //Almacenar en BD
-        const resultado = await clienteAxios.post(`/pedidos/nuevo/${id}`, pedido)
+        const resultado = await clienteAxios.post(`/pedidos/nuevo/${id}`, pedido, {
+            headers:{
+                Authorization: `Bearer ${Token}`
+            }
+        })
 
         //leer resultado
         if(resultado.status === 200) {

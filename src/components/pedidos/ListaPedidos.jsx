@@ -16,7 +16,12 @@ export const ListaPedidos = ({solicitado}) => {
             cancelButtonText:'Cancelar'
           }).then((result) => {
             if (result.isConfirmed) {
-                clienteAxios.delete(`/pedidos/${idPedido}`)
+                const Token = localStorage.getItem('Token')
+                clienteAxios.delete(`/pedidos/${idPedido}`,{
+                    headers:{
+                        Authorization: `Bearer ${Token}`
+                    }
+                })
                     .then(res => {
                         Swal.fire(
                             'Eliminado!',

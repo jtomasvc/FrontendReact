@@ -26,9 +26,11 @@ const NuevoProducto = () => {
 
         //almacenar en base de datos
         try {
+            const Token = localStorage.getItem('Token')
             const res = await clienteAxios.post('/productos', formData, {
                 headers:{
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${Token}`
                 }
             })
             //Lanzar alerta

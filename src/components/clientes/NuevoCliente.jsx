@@ -34,9 +34,13 @@ const NuevoCliente = () => {
     //Agregando CLiente
     const agregarCliente = e => {
         e.preventDefault()
-
+        const Token = localStorage.getItem('Token')
         //Enviar peticion
-        clienteAxios.post('/clientes', cliente)
+        clienteAxios.post('/clientes', cliente, {
+            headers:{
+                Authorization: `Bearer ${Token}`
+            }
+        })
             .then(res => {
                 //Validar si hay errores de mongo
                 if(res.data.code === 11000) {

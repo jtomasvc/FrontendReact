@@ -19,8 +19,13 @@ const Cliente = ({cliente}) => {
         confirmButtonText: 'Si, Eliminar!',
         cancelButtonText:'Cancelar'
       }).then((result) => {
+        const Token = localStorage.getItem('Token')
         if (result.isConfirmed) {
-            clienteAxios.delete(`/clientes/${idCliente}`)
+            clienteAxios.delete(`/clientes/${idCliente}`, {
+                headers:{
+                    Authorization: `Bearer ${Token}`
+                }
+            })
                 .then(res => {
                     Swal.fire(
                         'Eliminado!',
