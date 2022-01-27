@@ -119,7 +119,7 @@ const EditarProducto = () => {
                 <div className="campo">
                     <label>Imagen:</label>
                     {imagen && (
-                        <img src={`${process.env.REACT_APP_BACKEND_URL}/${imagen}`} alt='imagen' width="300"/>
+                        <img src={`${import.meta.env.VITE_BASE_BACKEND_URL}/${imagen}`} alt='imagen' width="300"/>
                     )}
                     <input 
                         type="file"  

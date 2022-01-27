@@ -42,7 +42,7 @@ const Producto = ({producto}) => {
                         <p className="nombre">{nombre}</p>
                         <p className="precio">{precio} </p>
                         { imagen && (
-                            <img src={`${process.env.REACT_APP_BACKEND_URL}/${imagen}`}/>
+                            <img src={`${import.meta.env.VITE_BASE_BACKEND_URL}/${imagen}`}/>
                         )}
                     </div>
                     <div className="acciones">
